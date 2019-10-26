@@ -5,9 +5,12 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@{ int customerCount = 1; }
 <ul>
     @foreach (var customers in Model.Customers)
     {
-        <li>@customers.Name</li>
+        string url = $"https://localhost:44309/Customers/Details/{customerCount}";
+        <li><a href=@url>@customers.Name</a></li>
+        customerCount += 1;
     }
 </ul>
