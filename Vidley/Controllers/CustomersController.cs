@@ -49,18 +49,36 @@ namespace Vidley.Controllers
 
         public ActionResult Index()
         {
-            var customers = new List<Customer>
+            List<Customer> customers = null;
+            customers = new List<Customer>
             {
               new Customer { Name = "Mike Mulderink" },
               new Customer { Name = "Tnaya Witmer" }
             };
+            //customers = null;
 
-            var viewModel = new CustomerViewModel
+            if (customers == null)
             {
-                Customers = customers
-            };
+                var nullCustomer = new List<Customer>
+                {
+                    new Customer { Name = "We don't have any customers yet." }
+                };
 
-            return View(viewModel);
+                var nullViewModel = new CustomerViewModel
+                {
+                    Customers = nullCustomer
+                };
+
+                return View(nullViewModel);
+            }
+            else
+            {
+                var viewModel = new CustomerViewModel
+                {
+                    Customers = customers
+                };
+                return View(viewModel);
+            }
         }
     }
 }

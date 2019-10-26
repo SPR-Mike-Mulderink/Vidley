@@ -5,12 +5,19 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@{ int customerCount = 1; }
-<ul>
-    @foreach (var customers in Model.Customers)
-    {
-        string url = $"https://localhost:44309/Customers/Details/{customerCount}";
-        <li><a href=@url>@customers.Name</a></li>
-        customerCount += 1;
-    }
-</ul>
+    <ul>
+        @{ int customerCount = 1; }
+        @foreach (var customers in @Model.Customers)
+        {
+            if (customers.Name == "We don't have any customers yet.")
+            {
+                <li><h1>@customers.Name</h1></li>
+            }
+            else
+            {
+                string url = $"https://localhost:44309/Customers/Details/{customerCount}";
+                <li><h2><a href=@url>@customers.Name</a></h2></li>
+                customerCount += 1;
+            }
+        }
+    </ul>
