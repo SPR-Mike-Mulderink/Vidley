@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Vidley.Models;
+using Vidley.ViewModels;
 
 namespace Vidley.Controllers
 {
@@ -14,11 +15,24 @@ namespace Vidley.Controllers
         {
             var movie = new Movie() { Name = "Shrek!" };
 
-            //Old ViewData Approach
+            var customers = new List<Customer>
+            {
+                new Customer { Name = "Customer1"},
+                new Customer { Name = "Customer 2" }
+            };
+
+            var viewModel = new RandomMovieViewModel
+            {
+                Movie = movie,
+                Customers = customers
+            };
+
+            //Old ViewData Approach vvv
             //ViewData["Movie"] = movie;
 
-            return View(movie);
+            return View(viewModel);
 
+            //Examples vvv
             //return Content("Hello World");
             //return HttpNotFound();
             //return new EmptyResult();
