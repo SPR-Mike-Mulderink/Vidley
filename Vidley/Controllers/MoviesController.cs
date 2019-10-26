@@ -49,7 +49,7 @@ namespace Vidley.Controllers
             return Content("id=" + id);
         }
 
-        public ActionResult Index(int? pageIndex, string sortBy)
+        public ActionResult IndexRandom(int? pageIndex, string sortBy)
         {
             if (!pageIndex.HasValue)
                 pageIndex = 1;
@@ -58,6 +58,42 @@ namespace Vidley.Controllers
                 sortBy = "Name";
 
             return Content(String.Format("pageIndex={0}&sortBy={1}", pageIndex, sortBy));
+        }
+
+        public ActionResult Index()
+        {
+            List<Movie> movies = null;
+            movies = new List<Movie>
+            {
+                new Movie { Name = "007" },
+                new Movie { Name = "Die Hard" },
+                new Movie { Name = "Star Wars" }
+            };
+            //movies = null;
+
+            if (movies == null)
+            {
+                var nullMovies = new List<Movie>
+                {
+                    new Movie { Name = "We don't have any Movies yet."}
+                };
+
+                var nullViewModel = new MoviesViewModel
+                {
+                    Movies = nullMovies
+                };
+
+                return View(nullViewModel);
+            } 
+            else
+            {
+                var moviesViewModel = new MoviesViewModel
+                {
+                    Movies = movies
+                };
+
+                return View(moviesViewModel);
+            }
         }
     }
 }

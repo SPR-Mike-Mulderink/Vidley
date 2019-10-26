@@ -1,0 +1,20 @@
+﻿@model Vidley.ViewModels.MoviesViewModel
+@{
+    ViewBag.Title = "Movies";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<ul>
+    @foreach (var movie in @Model.Movies)
+    {
+        if (movie.Name == "We don't have any movies yet.")
+        {
+            <li><h1>@movie.Name</h1></li>
+        }
+        else
+        { 
+            <li><h2>@movie.Name</h2></li>
+        }
+    }
+</ul>
+
